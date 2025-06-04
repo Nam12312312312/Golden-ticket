@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Golden Ticket Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #fff8dc;
+    }
+    h1 {
+      font-size: 3em;
+      color: #e67e22;
+    }
+    #count {
+      font-size: 5em;
+      margin: 20px;
+      color: #2c3e50;
+    }
+    button {
+      font-size: 1.5em;
+      padding: 15px 30px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c0392b;
+    }
+    #reset {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: gray;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎫 Vé Golden Ticket Còn Lại</h1>
+  <div id="count">100</div>
+  <button onclick="decrease()">Xé 1 vé</button>
+  <div id="reset" onclick="reset()">Đặt lại về 100</div>
+
+  <script>
+    let count = localStorage.getItem('goldenTickets');
+    if (count === null) {
+      count = 100;
+      localStorage.setItem('goldenTickets', count);
+    }
+    document.getElementById('count').textContent = count;
+
+    function decrease() {
+      count = parseInt(count);
+      if (count > 0) {
+        count -= 1;
+        localStorage.setItem('goldenTickets', count);
+        document.getElementById('count').textContent = count;
+      } else {
+        alert("Hết vé rồi nha 😭");
+      }
+    }
+
+    function reset() {
+      if (confirm("Bạn có chắc muốn đặt lại về 100 vé không?")) {
+        count = 100;
+        localStorage.setItem('goldenTickets', count);
+        document.getElementById('count').textContent = count;
+      }
+    }
+  </script>
+</body>
+</html>
